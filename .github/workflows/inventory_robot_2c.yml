@@ -1,0 +1,52 @@
+name: 庫存爬蟲 - Robot_2C # 工作流程名稱
+
+on:
+  schedule:
+    # 台灣時間下午 1 點 15 分 (UTC 05:15)
+    - cron: '15 5 * * *' 
+
+  workflow_dispatch: # 允許手動觸發
+
+jobs:
+  run_robot_2c: # Job 名稱，可以修改
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 環境
+
+    steps:
+    - name: 檢查程式碼
+      uses: actions/checkout@v4
+
+    - name: 設定 Python 環境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9' # 根據您的 Python 版本調整
+
+    - name: 安裝 Python 套件
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas selenium gspread oauth2client pytz # 確保所有依賴都在這裡
+
+    - name: 安裝 Chrome 瀏覽器
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+    
+    - name: 安裝 ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+        echo "Detected Chrome Version: $CHROME_VERSION"
+        CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.version")
+        echo "Detected ChromeDriver Version: $CHROMEDRIVER_VERSION"
+        CHROMEDRIVER_URL=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.downloads.chromedriver[] | select(.platform == \"linux64\") | .url")
+        wget "$CHROMEDRIVER_URL" -O chromedriver.zip
+        unzip chromedriver.zip
+        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+        sudo chmod +x /usr/local/bin/chromedriver    
+
+    - name: 執行 Robot_2C 腳本 # Step 名稱，可以修改
+      env:
+        # 環境變數 (兩者完全相同)
+        IBIZA_EMAIL: ${{ secrets.IBIZA_EMAIL }}
+        IBIZA_PASSWORD: ${{ secrets.IBIZA_PASSWORD }}
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      run: |
+        python inventory_crawler/robot_2c.py
