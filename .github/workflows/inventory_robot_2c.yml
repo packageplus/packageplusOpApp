@@ -23,7 +23,7 @@ jobs:
     - name: 安裝 Python 套件
       run: |
         python -m pip install --upgrade pip
-        pip install pandas selenium gspread oauth2client pytz # 確保所有依賴都在這裡
+        pip install pandas selenium gspread oauth2client pytz webdriver-manager # 確保所有依賴都在這裡
 
     - name: 安裝 Chrome 瀏覽器
       run: |
@@ -32,15 +32,17 @@ jobs:
     
     - name: 安裝 ChromeDriver
       run: |
-        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
-        echo "Detected Chrome Version: $CHROME_VERSION"
-        CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.version")
-        echo "Detected ChromeDriver Version: $CHROMEDRIVER_VERSION"
-        CHROMEDRIVER_URL=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.downloads.chromedriver[] | select(.platform == \"linux64\") | .url")
-        wget "$CHROMEDRIVER_URL" -O chromedriver.zip
-        unzip chromedriver.zip
-        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
-        sudo chmod +x /usr/local/bin/chromedriver    
+        # CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+        # echo "Detected Chrome Version: $CHROME_VERSION"
+        # CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.version")
+        # echo "Detected ChromeDriver Version: $CHROMEDRIVER_VERSION"
+        # CHROMEDRIVER_URL=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.downloads.chromedriver[] | select(.platform == \"linux64\") | .url")
+        # wget "$CHROMEDRIVER_URL" -O chromedriver.zip
+        # unzip chromedriver.zip
+        # sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+        # sudo chmod +x /usr/local/bin/chromedriver  
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
     - name: 執行 Robot_2C 腳本 # Step 名稱，可以修改
       env:
