@@ -18,6 +18,28 @@ chrome_options.add_argument("--no-sandbox") # 在 Docker 環境中需要
 chrome_options.add_argument("--disable-dev-shm-usage") # 避免 /dev/shm 空間不足
 chrome_options.add_argument("--window-size=1920,1080") # 設定視窗大小，模擬正常瀏覽器
 
+# 小白加入
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--disable-extensions')
+chrome_options.add_argument('--disable-plugins')
+chrome_options.add_argument('--disable-images') 
+
+try:
+    # 使用 webdriver-manager 自動下載匹配的 ChromeDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    print("WebDriver 初始化成功")
+except Exception as e:
+    print(f"WebDriver 初始化失敗: {e}")
+    # 如果 webdriver-manager 失敗，嘗試使用系統中的 ChromeDriver
+    try:
+        driver = webdriver.Chrome(options=chrome_options)
+        print("使用系統 ChromeDriver 成功")
+    except Exception as e2:
+        print(f"所有 WebDriver 初始化方法都失敗: {e2}")
+        raise e2
+# -------
+
 # GitHub Actions 會自動安裝 ChromeDriver，所以不需要指定路徑
 # 在 Actions 上直接用 WebDriver.Chrome(options=chrome_options) 即可
 driver = webdriver.Chrome(options=chrome_options)
