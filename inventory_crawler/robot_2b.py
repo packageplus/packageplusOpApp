@@ -78,9 +78,13 @@ time.sleep(1)  # 等待頁面加載
 print("✅ 成功進入庫存頁面！")
 
 #  === 選擇顯示 100 項結果 === 
-select_element = driver.find_element(By.NAME, "stock-table_length")
-select = Select(select_element)
-select.select_by_value("100")  # 設定為 100 項
+#select_element = driver.find_element(By.NAME, "stock-table_length")
+#select = Select(select_element)
+#select.select_by_value("100")  # 設定為 100 項
+
+select = Select(driver.find_element(By.XPATH, "//div[contains(@class, 'dataTable-container')]//select"))
+select.select_by_visible_text("100")
+
 time.sleep(1)  # 等待頁面更新
 
 #  === 定義允許「移倉不盤點」的商品 === 
@@ -232,3 +236,4 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
