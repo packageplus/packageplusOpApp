@@ -151,7 +151,8 @@ while True:
     if rows:
         # first_row_text = rows[0].text
         first_row_text = rows[0]
-        first_row_column_one = first_row_text[1].text
+        columns_one = first_row_text.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
+        first_row_column_one = columns_one[1].text
         print(f"{first_row_column_one}")
     else:
         first_row_text = None
@@ -260,6 +261,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
