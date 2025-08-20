@@ -150,7 +150,8 @@ while True:
     # 換頁準備：記下這一頁第一列
     if rows:
         # first_row_text = rows[0].text
-        first_row_text = rows[1].text
+        first_row_text = rows[0].text
+        print(f"{first_row_text}")
     else:
         first_row_text = None
 
@@ -158,7 +159,7 @@ while True:
     try:
         # next_a = driver.find_element(By.CSS_SELECTOR, "li.paginate_button.next:not(.disabled) > a")
         next_a = driver.find_element(By.CSS_SELECTOR, ".btn.btn-success:not(.disabled)")
-        print("找到下一頁按鈕了")
+        # print("找到下一頁按鈕了")
     except NoSuchElementException:
         print("❌ 沒有找到下一頁按鈕，停止翻頁。")
         break
@@ -170,7 +171,7 @@ while True:
     try:
         wait.until(
             lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
-                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[1].text != first_row_text
+                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
         )
@@ -258,6 +259,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
