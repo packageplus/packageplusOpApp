@@ -91,7 +91,7 @@ try:
 except NoSuchElementException:
     print("❌ 找不到 value=100 的選項，請檢查 HTML")
 
-time.sleep(3)  # 等待頁面更新
+time.sleep(1)  # 等待頁面更新
 
 #  === 定義允許「移倉不盤點」的商品 === 
 allow_extra_status = {"RP-SIZESS", "RP-SIZESM", "RP-SIZESL", "RP-SIZESXL", "rp-strap200cm"}
@@ -257,6 +257,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
