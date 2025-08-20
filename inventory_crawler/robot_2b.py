@@ -125,7 +125,7 @@ while True:
             
             product_name = columns[1].text.strip()
             quality_status = columns[7].text.strip()
-            available_stock = columns[8].text.strip()
+            available_stock = columns[10].text.strip()
             product_code = product_name.split(" ")[0].strip()
 
             if product_code in allow_extra_status:
@@ -245,6 +245,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
