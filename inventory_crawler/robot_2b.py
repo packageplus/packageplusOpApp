@@ -116,7 +116,7 @@ while True:
     for row in rows:
         # columns = row.find_elements(By.TAG_NAME, "td")
         columns = row.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
-        print("{columns[1].text}")
+        # print("{columns[1].text}")
         if len(columns) > 6:
             # product_name = columns[0].text.strip()
             # quality_status = columns[5].text.strip()
@@ -219,7 +219,8 @@ except Exception as e:
     exit()
 
 
-sheet_id = "1qB5xe4inx4spFXPxOdSytL_BUElR6Bd0aVZ2TTqrAuY"
+# sheet_id = "1qB5xe4inx4spFXPxOdSytL_BUElR6Bd0aVZ2TTqrAuY"
+sheet_id = "1QqFfI9XlPkuWIMhNM8vYUn-BNg5aANynaBT7ANOIPpo"
 sheet = client.open_by_key(sheet_id).worksheet("庫存管理表")
 
 # 寫入 F 欄（從第 2 列開始）
@@ -244,6 +245,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
