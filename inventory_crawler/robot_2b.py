@@ -116,6 +116,7 @@ while True:
     for row in rows:
         # columns = row.find_elements(By.TAG_NAME, "td")
         columns = row.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
+        print("{columns[1].text}")
         if len(columns) > 6:
             # product_name = columns[0].text.strip()
             # quality_status = columns[5].text.strip()
@@ -243,6 +244,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
