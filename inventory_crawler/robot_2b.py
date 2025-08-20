@@ -125,7 +125,7 @@ while True:
             
             product_name = columns[1].text.strip()
             quality_status = columns[7].text.strip()
-            available_stock = columns[10].text.strip()
+            available_stock = columns[8].text.strip()
             product_code = product_name.split(" ")[0].strip()
 
             if product_code in allow_extra_status:
@@ -219,8 +219,8 @@ except Exception as e:
     exit()
 
 
-# sheet_id = "1qB5xe4inx4spFXPxOdSytL_BUElR6Bd0aVZ2TTqrAuY"
-sheet_id = "1QqFfI9XlPkuWIMhNM8vYUn-BNg5aANynaBT7ANOIPpo"
+sheet_id = "1qB5xe4inx4spFXPxOdSytL_BUElR6Bd0aVZ2TTqrAuY"
+# sheet_id = "1QqFfI9XlPkuWIMhNM8vYUn-BNg5aANynaBT7ANOIPpo"
 sheet = client.open_by_key(sheet_id).worksheet("庫存管理表")
 
 # 寫入 F 欄（從第 2 列開始）
@@ -245,6 +245,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
