@@ -140,7 +140,7 @@ while True:
                 "商品名稱": product_name,
                 "庫存": available_stock
             })
-    print(f"{inventory_data}")
+    # print(f"{inventory_data}")
     # 換頁準備：記下這一頁第一列
     if rows:
         first_row_text = rows[0].text
@@ -150,6 +150,7 @@ while True:
     # 尋找「可點」的下一頁 <a>
     try:
         next_a = driver.find_element(By.CSS_SELECTOR, "li.paginate_button.next:not(.disabled) > a")
+        print("找到下一頁按鈕了")
     except NoSuchElementException:
         break
 
@@ -245,6 +246,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
