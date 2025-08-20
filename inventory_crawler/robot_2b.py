@@ -150,8 +150,9 @@ while True:
     # 換頁準備：記下這一頁第一列
     if rows:
         # first_row_text = rows[0].text
-        first_row_text = rows[0].text
-        print(f"{first_row_text}")
+        first_row_text = rows[0]
+        first_row_column_one = first_row_text[1].text
+        print(f"{first_row_column_one}")
     else:
         first_row_text = None
 
@@ -168,17 +169,17 @@ while True:
     next_a.click()
 
     # 等到表格內容真的換新
-    # try:
-    #     wait.until(
-    #         lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
-    #                   and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text
-    #         # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
-    #                     # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
-    #     )
-    #     print("頁面成功刷新")
-    # except TimeoutException:
-    #     print("⚠️ 頁面未成功刷新，停止爬取")
-    #     break
+    try:
+        wait.until(
+            lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
+                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text
+            # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+                        # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
+        )
+        print("頁面成功刷新")
+    except TimeoutException:
+        print("⚠️ 頁面未成功刷新，停止爬取")
+        break
 
 
 df = pd.DataFrame(inventory_data)
@@ -259,6 +260,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
