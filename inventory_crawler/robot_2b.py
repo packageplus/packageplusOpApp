@@ -83,8 +83,8 @@ select_element = driver.find_element(By.CSS_SELECTOR, "select.form-control")
 select = Select(select_element)
 select.select_by_value("100")  # 設定為 100 項
 
-selected_option = select.first_selected_option
-print("目前選中的 option：", selected_option.text, "| value=", selected_option.get_attribute("value"))
+value = driver.execute_script("return document.querySelector('select.form-control').value")
+print("目前 select 的值是：", value)
 
 time.sleep(3)  # 等待頁面更新
 
@@ -252,6 +252,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
