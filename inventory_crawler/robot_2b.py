@@ -81,10 +81,15 @@ print("✅ 成功進入庫存頁面！")
 # select_element = driver.find_element(By.NAME, "stock-table_length")
 select_element = driver.find_element(By.CSS_SELECTOR, "select.form-control")
 select = Select(select_element)
-select.select_by_value("100")  # 設定為 100 項
+# select.select_by_value("100")  # 設定為 100 項
 
-value = driver.execute_script("return document.querySelector('select.form-control').value")
-print("目前 select 的值是：", value)
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+try:
+    select.select_by_value("100")
+    print("✅ 成功選到 value=100")
+except NoSuchElementException:
+    print("❌ 找不到 value=100 的選項，請檢查 HTML")
 
 time.sleep(3)  # 等待頁面更新
 
@@ -92,7 +97,7 @@ time.sleep(3)  # 等待頁面更新
 allow_extra_status = {"RP-SIZESS", "RP-SIZESM", "RP-SIZESL", "RP-SIZESXL", "rp-strap200cm"}
 
 #  === 找到商品行 === 
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+# from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
@@ -252,6 +257,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
