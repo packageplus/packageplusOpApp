@@ -175,9 +175,12 @@ while True:
             lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
                       and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0]
                             .find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text != first_row_column_one
+            
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
         )
+        testDefine = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text
+        print(f"{testDefine}")
         print("頁面成功刷新")
     except TimeoutException:
         print("⚠️ 頁面未成功刷新，停止爬取")
@@ -262,6 +265,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
