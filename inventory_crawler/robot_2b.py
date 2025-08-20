@@ -83,7 +83,7 @@ select_element = driver.find_element(By.CSS_SELECTOR, "select.form-control")
 select = Select(select_element)
 select.select_by_value("100")  # 設定為 100 項
 
-print("成功抓取form-control")
+print("✅ 成功抓取form-control")
 
 time.sleep(1)  # 等待頁面更新
 
@@ -100,7 +100,8 @@ wait = WebDriverWait(driver, 10)  # 最多等10秒
 inventory_data = []
 
 while True:
-    rows = driver.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+    # rows = driver.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+    rows = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
 
     # print 頁碼和第一列商品，方便 debug
     try:
@@ -236,6 +237,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
