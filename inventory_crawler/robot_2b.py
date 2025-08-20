@@ -85,7 +85,7 @@ select.select_by_value("100")  # 設定為 100 項
 
 print("✅ 成功抓取form-control")
 
-time.sleep(1)  # 等待頁面更新
+time.sleep(3)  # 等待頁面更新
 
 #  === 定義允許「移倉不盤點」的商品 === 
 allow_extra_status = {"RP-SIZESS", "RP-SIZESM", "RP-SIZESL", "RP-SIZESXL", "rp-strap200cm"}
@@ -251,6 +251,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
