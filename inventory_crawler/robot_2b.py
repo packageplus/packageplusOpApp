@@ -116,7 +116,7 @@ while True:
     for row in rows:
         # columns = row.find_elements(By.TAG_NAME, "td")
         columns = row.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
-        # print("{columns[1].text}")
+        print("{columns[1].text}")
         if len(columns) > 6:
             # product_name = columns[0].text.strip()
             # quality_status = columns[5].text.strip()
@@ -140,7 +140,7 @@ while True:
                 "商品名稱": product_name,
                 "庫存": available_stock
             })
-    print({inventory_data})
+    # print({inventory_data})
     # 換頁準備：記下這一頁第一列
     if rows:
         first_row_text = rows[0].text
@@ -245,6 +245,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
