@@ -149,7 +149,8 @@ while True:
 
     # 尋找「可點」的下一頁 <a>
     try:
-        next_a = driver.find_element(By.CSS_SELECTOR, "li.paginate_button.next:not(.disabled) > a")
+        # next_a = driver.find_element(By.CSS_SELECTOR, "li.paginate_button.next:not(.disabled) > a")
+        next_a = driver.find_element(By.CSS_SELECTOR, "button.btn.btn-success")
         print("找到下一頁按鈕了")
     except NoSuchElementException:
         print("❌ 沒有找到下一頁按鈕，停止翻頁。")
@@ -250,6 +251,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
