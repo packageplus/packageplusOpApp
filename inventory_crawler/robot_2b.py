@@ -114,11 +114,17 @@ while True:
         print(f"頁碼: {current_page}, 沒有資料")
 
     for row in rows:
-        columns = row.find_elements(By.TAG_NAME, "td")
+        # columns = row.find_elements(By.TAG_NAME, "td")
+        columns = row.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
         if len(columns) > 6:
-            product_name = columns[0].text.strip()
-            quality_status = columns[5].text.strip()
-            available_stock = columns[6].text.strip()
+            # product_name = columns[0].text.strip()
+            # quality_status = columns[5].text.strip()
+            # available_stock = columns[6].text.strip()
+            # product_code = product_name.split(" ")[0].strip()
+            
+            product_name = columns[1].text.strip()
+            quality_status = columns[7].text.strip()
+            available_stock = columns[10].text.strip()
             product_code = product_name.split(" ")[0].strip()
 
             if product_code in allow_extra_status:
@@ -237,6 +243,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
