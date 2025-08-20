@@ -174,7 +174,7 @@ while True:
         wait.until(
             lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
                       and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0]
-                            .find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text != first_row_column_one
+                            .find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text = first_row_column_one
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
         )
@@ -262,6 +262,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
