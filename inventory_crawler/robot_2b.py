@@ -150,12 +150,10 @@ while True:
     # 換頁準備：記下這一頁第一列
     if rows:
         # first_row_text = rows[0].text
-        
-        first_row_text2 = rows[0].text
         first_row_text = rows[0]
         columns_one = first_row_text.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
         first_row_column_one = columns_one[1].text
-        print(f"⚠️{first_row_column_one}")
+        # print(f"⚠️{first_row_column_one}")
     else:
         first_row_text = None
 
@@ -171,11 +169,8 @@ while True:
 
     # 點擊「下一頁」
     next_a.click()
-    # next_b.click()
     time.sleep(2)
-    testDefine = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0]
-    test2 = testDefine.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text
-    print(f"{test2}")
+    
     # 等到表格內容真的換新
     try:
         wait.until(
@@ -186,8 +181,6 @@ while True:
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
 
-            # lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
-            #           and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text2
         )
         
         print("✅ 頁面成功刷新")
@@ -249,7 +242,6 @@ except Exception as e:
 
 
 sheet_id = "1qB5xe4inx4spFXPxOdSytL_BUElR6Bd0aVZ2TTqrAuY"
-# sheet_id = "1QqFfI9XlPkuWIMhNM8vYUn-BNg5aANynaBT7ANOIPpo"
 sheet = client.open_by_key(sheet_id).worksheet("庫存管理表")
 
 # 寫入 F 欄（從第 2 列開始）
@@ -274,6 +266,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
