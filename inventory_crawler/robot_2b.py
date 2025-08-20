@@ -168,6 +168,7 @@ while True:
 
     # 點擊「下一頁」
     next_a.click()
+    time.sleep(4)
     testDefine = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0]
     test2 = testDefine.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text
     print(f"{test2}")
@@ -266,6 +267,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
