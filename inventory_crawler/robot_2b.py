@@ -140,7 +140,7 @@ while True:
                 "商品名稱": product_name,
                 "庫存": available_stock
             })
-    print({inventory_data})
+    print(f"{inventory_data}")
     # 換頁準備：記下這一頁第一列
     if rows:
         first_row_text = rows[0].text
@@ -245,6 +245,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
