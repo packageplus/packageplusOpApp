@@ -162,10 +162,10 @@ while True:
     # 等到表格內容真的換新
     try:
         wait.until(
-            # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
             lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
-                      # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
-                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text
+                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text.strip() != first_row_text
+            # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+                        # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
         )
         print("頁面成功刷新")
     except TimeoutException:
@@ -251,6 +251,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
