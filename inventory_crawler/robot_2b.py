@@ -149,7 +149,8 @@ while True:
     # print(f"{inventory_data}")
     # 換頁準備：記下這一頁第一列
     if rows:
-        first_row_text = rows[0].text
+        # first_row_text = rows[0].text
+        first_row_text = rows[1].text
     else:
         first_row_text = None
 
@@ -169,7 +170,7 @@ while True:
     try:
         wait.until(
             lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
-                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text.strip() != first_row_text
+                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[1].text != first_row_text
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
         )
@@ -257,6 +258,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
