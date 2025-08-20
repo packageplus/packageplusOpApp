@@ -150,6 +150,8 @@ while True:
     # 換頁準備：記下這一頁第一列
     if rows:
         # first_row_text = rows[0].text
+        
+        first_row_text2 = rows[0].text
         first_row_text = rows[0]
         columns_one = first_row_text.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
         first_row_column_one = columns_one[1].text
@@ -160,19 +162,17 @@ while True:
     # 尋找「可點」的下一頁 <a>
     try:
         # next_a = driver.find_element(By.CSS_SELECTOR, "li.paginate_button.next:not(.disabled) > a")
+        # next_a = driver.find_element(By.CSS_SELECTOR, ".btn.btn-success:not(.disabled)")
         next_a = driver.find_elements(By.CSS_SELECTOR, ".btn.btn-success:not(.disabled)")[2]
-        # next_b = driver.find_element(By.CSS_SELECTOR, ".form-horizontal .col-md-3 .btn-group .btn-success:not(.disabled")
         print("✅ 找到下一頁按鈕了")
     except NoSuchElementException:
         print("❌ 沒有找到下一頁按鈕，停止翻頁。")
         break
 
-    aa = next_a.text
-    print(f"{aa}")
     # 點擊「下一頁」
     next_a.click()
     # next_b.click()
-    time.sleep(4)
+    time.sleep(2)
     testDefine = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0]
     test2 = testDefine.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")[1].text
     print(f"{test2}")
@@ -185,6 +185,9 @@ while True:
             
             # lambda d: d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
                         # and d.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")[0].text != first_row_text
+
+            lambda d: d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
+                      and d.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")[0].text != first_row_text2
         )
         
         print("✅ 頁面成功刷新")
@@ -200,7 +203,7 @@ df = df.groupby(["商品編號"], as_index=False).agg({
     "商品名稱": "first",  # 保留第一個名稱
     "庫存": "sum"  # 合併庫存數量
 })
-driver.quit()
+  
 #  === 自定義排序規則 === 
 custom_order = [
     "EBEA0000000", "EBFA0000000", "EBGA0000000", "EBHA0000000", "EBJA0000000", "EBMA0000000",
@@ -271,6 +274,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
