@@ -79,7 +79,7 @@ print("✅ 成功進入庫存頁面！")
 
 #  === 選擇顯示 100 項結果 === 
 # select_element = driver.find_element(By.NAME, "stock-table_length")
-select_element = driver.find_element(By.CSS_SELECTOR, “select.form-control")
+select_element = driver.find_element(By.CSS_SELECTOR, "select.form-control")
 select = Select(select_element)
 select.select_by_value("100")  # 設定為 100 項
 
@@ -236,6 +236,7 @@ print("✅ 數據已寫入 F 欄並更新時間！")
 
 # **關閉瀏覽器**
 driver.quit()
+
 
 
 
