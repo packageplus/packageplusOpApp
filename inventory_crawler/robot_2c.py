@@ -126,7 +126,7 @@ for row in rows:
         })
 
 df = pd.DataFrame(inventory_data)
-print(inventory_data)
+print(df)
 driver.quit()
 exit()
 # === 建立原始編號欄（取前 10 碼）===
@@ -233,5 +233,6 @@ print("✅ 已成功同步至 Google Sheet！")
 
 # === 關閉瀏覽器 ===
 driver.quit()
+
 
 
