@@ -197,7 +197,7 @@ except Exception as e:
 # === 使用 Google Sheet ID 開啟 ===
 sheet_id = "1U6F3hvj76YGOSWodEkfZmkSS31F1QmNndI16igBkgGE"  # Sheet ID
 # sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表（自動）")
-sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表>>恩妃人工更新")
+sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表（自動）表頭名稱請勿更動!!")
 
 # === 更新每筆庫存資料到 Google Sheet (G欄 與 Q欄) ===
 updates = []
@@ -233,6 +233,7 @@ print("✅ 已成功同步至 Google Sheet！")
 
 # === 關閉瀏覽器 ===
 driver.quit()
+
 
 
 
