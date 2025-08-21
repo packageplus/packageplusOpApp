@@ -131,9 +131,6 @@ df = pd.DataFrame(inventory_data)
 # === 建立原始編號欄（取前 10 碼）===
 df["原始編號"] = df["商品編號"].apply(lambda x: x[:10] if "防盜貼紙" not in x else x)
 
-print(df)
-driver.quit()
-exit()
 # === 自定義排序順序（含防盜貼紙作為最後一項）===
 custom_order = [
     "ECA0000005", "ECA0000001", "ECA0000002", "ECA0000006", "ECA0000003", "ECA0000004", "ECA0000009",
@@ -199,7 +196,8 @@ except Exception as e:
 
 # === 使用 Google Sheet ID 開啟 ===
 sheet_id = "1U6F3hvj76YGOSWodEkfZmkSS31F1QmNndI16igBkgGE"  # Sheet ID
-sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表（自動）")
+# sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表（自動）")
+sheet = client.open_by_key(sheet_id).worksheet("3. 庫存管理表>>恩妃人工更新")
 
 # === 更新每筆庫存資料到 Google Sheet (G欄 與 Q欄) ===
 updates = []
@@ -235,6 +233,7 @@ print("✅ 已成功同步至 Google Sheet！")
 
 # === 關閉瀏覽器 ===
 driver.quit()
+
 
 
 
