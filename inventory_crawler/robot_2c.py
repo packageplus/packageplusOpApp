@@ -90,18 +90,24 @@ except NoSuchElementException:
     print("❌ 找不到 value=100 的選項，請檢查 HTML")
     
 time.sleep(1)
-driver.quit()
-exit()
+
 # === 抓取庫存資料 ===
 inventory_data = []
 
-rows = driver.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+# rows = driver.find_elements(By.CSS_SELECTOR, "#stock-table tbody tr")
+rows = driver.find_elements(By.CSS_SELECTOR, ".rdt_TableBody .rdt_TableRow")
+
 for row in rows:
-    columns = row.find_elements(By.TAG_NAME, "td")
+    # columns = row.find_elements(By.TAG_NAME, "td")
+    columns = row.find_elements(By.CSS_SELECTOR, ".rdt_TableCell")
+    
     if len(columns) > 6:
-        product_name = columns[0].text.strip()
-        quality_status = columns[5].text.strip()
-        available_stock = columns[6].text.strip()
+        # product_name = columns[0].text.strip()
+        # quality_status = columns[5].text.strip()
+        # available_stock = columns[6].text.strip()
+        product_name = columns[1].text.strip()
+        quality_status = columns[7].text.strip()
+        available_stock = columns[10].text.strip()
         product_code = product_name.split(" ")[0].strip()
         # === 處理特例：商品編號修正 ===
         if product_code.startswith("DDA00000001"):
@@ -120,7 +126,9 @@ for row in rows:
         })
 
 df = pd.DataFrame(inventory_data)
-
+print(inventory_data)
+driver.quit()
+exit()
 # === 建立原始編號欄（取前 10 碼）===
 df["原始編號"] = df["商品編號"].apply(lambda x: x[:10] if "防盜貼紙" not in x else x)
 
@@ -225,4 +233,5 @@ print("✅ 已成功同步至 Google Sheet！")
 
 # === 關閉瀏覽器 ===
 driver.quit()
+
 
