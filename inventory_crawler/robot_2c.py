@@ -75,11 +75,23 @@ time.sleep(1)
 print("✅ 成功進入庫存頁面！")
 
 # === 設定顯示 100 筆資料 ===
-select_element = driver.find_element(By.NAME, "stock-table_length")
+# select_element = driver.find_element(By.NAME, "stock-table_length")
+# select = Select(select_element)
+# select.select_by_value("100")
+select_element = driver.find_element(By.CSS_SELECTOR, "select.form-control")
 select = Select(select_element)
-select.select_by_value("100")
-time.sleep(1)
 
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+try:
+    select.select_by_value("100")
+    print("✅ 成功選到 value=100")
+except NoSuchElementException:
+    print("❌ 找不到 value=100 的選項，請檢查 HTML")
+    
+time.sleep(1)
+driver.quit()
+exit()
 # === 抓取庫存資料 ===
 inventory_data = []
 
@@ -213,3 +225,4 @@ print("✅ 已成功同步至 Google Sheet！")
 
 # === 關閉瀏覽器 ===
 driver.quit()
+
